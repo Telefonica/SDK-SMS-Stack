@@ -14,15 +14,19 @@ You can download use sms-stack in multiple environments in order to implement it
 
 ## Typescript
 Npm - https://www.npmjs.com
+
 Nodejs - https://nodejs.org/en/
+
 Typescript - https://www.typescriptlang.org/#download-links
 
 ## Python
 Python 3.4 or higher - https://www.python.org/downloads/
+
 Pip - https://pypi.org/project/pip/
 
 ## Android
 Android API 23 (6.0) or higher - https://developer.android.com/about/versions/marshmallow/android-6.0
+
 Android Studio + Gradle (With JUnit) - https://developer.android.com/studio/install
 
 # Usage
