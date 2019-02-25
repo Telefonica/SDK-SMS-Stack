@@ -149,11 +149,13 @@ lib/
 
 *.iml
 .gradle
-/sms-stack-android/local.properties
-/sms-stack-android/.idea/libraries
-/sms-stack-android/.idea/modules.xml
-/sms-stack-android/.idea/workspace.xml
-/sms-stack-android/.DS_Store
-/sms-stack-android/build
-/sms-stack-android/captures
-/sms-stack-android/.externalNativeBuild
+/local.properties
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.DS_Store
+/build
+/captures
+/.externalNativeBuild
+
+paper/~\$ackSMSPaper\.docx
