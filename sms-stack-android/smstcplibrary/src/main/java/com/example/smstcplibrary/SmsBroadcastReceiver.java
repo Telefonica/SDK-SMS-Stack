@@ -8,8 +8,6 @@ import android.telephony.SmsMessage;
 
 public class SmsBroadcastReceiver extends BroadcastReceiver {
 
-    private static final String TAG = "SmsBroadcasReceiver";
-    //private final String[] serviceProviderNumbers;
     private Listener listener;
 
     public SmsBroadcastReceiver() {

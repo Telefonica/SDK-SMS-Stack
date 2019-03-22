@@ -37,7 +37,7 @@ public class SMSTCP {
         this.cipherMode = cipherMode;
         this.privateKey = privateKey;
         this.smsBroadcastReceiver = new SmsBroadcastReceiver();
-        this.activity.registerReceiver(smsBroadcastReceiver, new IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION));
+        this.registerReciver();
 
         if (!isPermissionGranted(Manifest.permission.READ_SMS) || !isPermissionGranted(Manifest.permission.READ_PHONE_STATE)) {
             requestReadAndSendSmsPermission(new String[]{Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE});
@@ -126,6 +126,14 @@ public class SMSTCP {
         return AESCipher.decryptAES(privateKey, AESMesage);
     }
 
+
+    public void unregisterReciver() {
+        this.activity.unregisterReceiver(smsBroadcastReceiver);
+    }
+
+    public void registerReciver() {
+        this.activity.registerReceiver(smsBroadcastReceiver, new IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION));
+    }
 
 
 }

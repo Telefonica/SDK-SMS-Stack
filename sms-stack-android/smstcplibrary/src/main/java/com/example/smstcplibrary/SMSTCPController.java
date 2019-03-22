@@ -114,6 +114,17 @@ public class SMSTCPController {
         }
     }
 
+
+    public void unregisterRec() {
+        smstcpReceiver.unregisterReciver();
+        smstcpSender.unregisterReciver();
+    }
+
+    public void registerRec() {
+        smstcpReceiver.registerReciver();
+        smstcpSender.registerReciver();
+    }
+
     public interface CompletionHandler {
         public void handleFinalMessageReceived(ArrayList<String> messages, String[] senderNumber);
         public void handleMessageReceived(SMSTCPLayer smsTCP, String[] senderNumber);
