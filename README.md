@@ -36,11 +36,11 @@ Simply add the framework in one of each repositories given in your repository.
 ```npm install sms-stack 1.x.x```
 
 ## Python
-```pip install sms stack 0.x.x```
+```pip install sms stack 1.x.x```
 
 ## Android
 Add in the gradle app file
-```implementation 'com.example.smstcplibrary:smsstack:0.x.x```
+```implementation 'com.example.smstcplibrary:smsstack:1.x.x```
 
 For further implementation, please use the given wiki
 

@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     TextView mSMSDisplaySbegin;
     TextView mSMSDisplayCipher;
 
+    Switch mAckSWitch;
+
 
     TextView mSMSDisplayData;
 
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         mSMSDisplayFin = (TextView) findViewById(R.id.tv_fin_display);
         mSMSDisplaySbegin = (TextView) findViewById(R.id.tv_sBegin_display);
         mSMSDisplayCipher = (TextView) findViewById(R.id.tv_cipher_display);
+        mAckSWitch = findViewById((R.id.response_switch));
 
 
         String[] phoneNo = {mSMSTextDestinataryView.getText().toString()};
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendSMS() {
         String[] phoneNo = {mSMSTextDestinataryView.getText().toString()};
-        smsListener.sendNewMessage(mSMSTextView.getText().toString(), phoneNo);
+        smsListener.sendNewMessage(mSMSTextView.getText().toString(), phoneNo, mAckSWitch.isChecked());
     }
 
     @Override

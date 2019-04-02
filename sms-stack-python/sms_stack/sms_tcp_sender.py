@@ -18,7 +18,7 @@ class SmsTcpSender(SmsTcp):
         self._controller = controller
 
 
-    def create_new_conversation(self, sms, sender):
+    def create_new_conversation(self, sms, sender, ack_back = True):
         """Create a new conversation of a given message, sending the packets into the network
         
         Args:
@@ -32,10 +32,10 @@ class SmsTcpSender(SmsTcp):
         if(message_to_send is None):
             return
         for idx, message in enumerate(message_to_send):
-            self.send_message(message, key, idx, idx == len(message_to_send) -1, sender)
+            self.send_message(message, key, idx, idx == len(message_to_send) -1, sender, ack_back)
         self._controller.handle_final_message_sent(message_to_send, sender)
     
-    def send_message(self, text, key, s_begin, is_fin, sender):
+    def send_message(self, text, key, s_begin, is_fin, sender, ack_back):
         """Send a single packet
         
         Args:
@@ -46,7 +46,7 @@ class SmsTcpSender(SmsTcp):
             sender ([str]): List of sender
         """
 
-        sms_layer = SmsTcpLayer(id=0, key=key, syn= + (not is_fin), ack=0, psh=0, fin=+is_fin, s_begin=s_begin, cipher=self.cipher_mode, check_sum=0, data=text)
+        sms_layer = SmsTcpLayer(id=0, key=key, syn= + (not is_fin), ack=0, psh=+ (not ack_back), fin=+is_fin, s_begin=s_begin, cipher=self.cipher_mode, check_sum=0, data=text)
         self.send_sms(sms_layer, sender)
         self._controller.handle_message_sent(sms_layer, sender)
 

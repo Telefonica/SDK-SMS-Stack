@@ -39,8 +39,8 @@ export class SmsTcpController {
         this.observer.handleMessageSent(layer, sender);
     }
 
-    public sendMessage(sms: string, sender: string){
-        this.sender.createNewConversation(sms, sender);
+    public sendMessage(sms: string, sender: string, ackBack = true){
+        this.sender.createNewConversation(sms, sender, ackBack);
     }
 
     public processMessage(message: string[]): string {

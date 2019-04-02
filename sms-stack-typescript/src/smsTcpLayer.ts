@@ -68,5 +68,4 @@ export class SMSTCPlayer extends SmsTcpAppLayer {
         return tcpLayer;
     }
 
-
 }

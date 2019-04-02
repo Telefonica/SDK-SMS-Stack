@@ -87,8 +87,10 @@ public class SMSTCPReceiver extends SMSTCP {
                 return;
             }
         }
-        responseConversation(sms, phoneNo, sms.sBegin, 0, 1, 0, 1);
-        removeSMSByKey(sms.key);
+        if(sms.psh == 0) {
+            responseConversation(sms, phoneNo, sms.sBegin, 0, 1, 0, 1);
+            removeSMSByKey(sms.key);
+        }
         this.completionHandler.handleFinalMessage(messages, phoneNo);
     }
 

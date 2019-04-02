@@ -27,7 +27,7 @@ public class SMSTCPSender extends SMSTCP {
      * @param sms String with the message to send
      * @param phoneNo Phone number(s)
      */
-    public void createNewConverstaion(String sms, String[] phoneNo) {
+    public void createNewConverstaion(String sms, String[] phoneNo, Boolean ackBack) {
         if (!isPermissionGranted(Manifest.permission.SEND_SMS) || !isPermissionGranted(Manifest.permission.READ_PHONE_STATE)){
             requestReadAndSendSmsPermission(new String[]{Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE});
             return;
@@ -58,8 +58,9 @@ public class SMSTCPSender extends SMSTCP {
             String message = this.messagesToSend.get(i);
             int fin = i == (this.messagesToSend.size() - 1) ? 1 : 0;
             int syn = i == (this.messagesToSend.size() - 1) ? 0 : 1;
+            int psh = ackBack ? 0: 1;
             SMSTCPLayer smsTCP = new SMSTCPLayer(ID, key, syn, 0,
-                    0, fin, i, 0, message);
+                    psh, fin, i, 0, message);
             sendSms(smsTCP, phoneNo);
             this.completionHandler.handleMessage();
         }
