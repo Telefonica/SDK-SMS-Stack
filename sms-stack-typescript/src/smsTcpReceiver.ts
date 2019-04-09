@@ -10,6 +10,14 @@ export class SmsTcpReceiver extends SMSTCP  {
     private controller?: SmsTcpController;
     private messageReceived: TcpLayer[] = [];
     
+    /**
+     * Class that handles the reception of Sms
+     * @param cipherMode Cipher mode | 0, Base64 | 1, PSK AES CBC
+     * @param cipherKey Pre shared key for PSK AES CBC Mode
+     * @param controller Controller class
+     * @param broadcasterRec Broadcast object to receive message
+     * @param broadcasterSend Broadcast object to send message
+     */
     constructor(cipherMode: number, cipherKey: string, controller:SmsTcpController, broadcasterRec: Observable<SmsReceived>, broadcasterSend: SmsBroadcaster) {
         super(cipherMode, cipherKey, broadcasterSend);
         this.controller = controller;
@@ -18,7 +26,12 @@ export class SmsTcpReceiver extends SMSTCP  {
         })
     }
 
-    public addNewMessage(sms: string, receiver: string) {
+    /**
+     * Adds new message to the protocol stack
+     * @param sms Sms received
+     * @param Sender Sender number
+     */
+    public addNewMessage(sms: string, sender: string) {
         let smsLayer: TcpLayer;
         try {
             smsLayer = SMSTCPlayer.decodeSMS(sms);
@@ -29,17 +42,21 @@ export class SmsTcpReceiver extends SMSTCP  {
         }
         this.messageReceived.push(smsLayer);
         if(this.controller !== null){
-            this.controller!.handleMessageReceived(smsLayer, receiver)
+            this.controller!.handleMessageReceived(smsLayer, sender)
         }
         if(smsLayer.fin === 1 && smsLayer.ack === 0){
             setTimeout(() => {
-                this.checkSmsTcpStream(smsLayer, receiver);
+                this.checkSmsTcpStream(smsLayer, sender);
             }, 5000)
         }
     }
 
     
-
+    /**
+     * Checks the stream in order to detect loss in Stack
+     * @param sms Sms Stack end packet
+     * @param receiver Name of the receiver
+     */
     private checkSmsTcpStream(sms: TcpLayer, receiver: string){
         const smsStream = this.messageReceived
         .filter(x => x.key === sms.key)
@@ -65,7 +82,11 @@ export class SmsTcpReceiver extends SMSTCP  {
     }
 
     
-
+    /**
+     * Removes an Sms Stream by its key identifier
+     * @param key Key identifier of the stream
+     * @param sBegin Number of layer to send
+     */
     private removeSmsBy(key: number, sBegin?: number): TcpLayer[]{
         if(sBegin != null){
             return this.messageReceived.filter(sms => !(sms.key === key) && (sms.sBegin >= sBegin));

@@ -31,16 +31,16 @@ export class SmsTcpController {
         this.observer.handleMessageReceived(layer, sender);
     }
     
-    public handleFinalMessageSent(messages: string[], sender: string){
-        this.observer.handleFinalMessageSent(messages, sender);
+    public handleFinalMessageSent(messages: string[], recipient: string){
+        this.observer.handleFinalMessageSent(messages, recipient);
     }
 
-    public handleMessageSent(layer: SMSTCPlayer, sender: string) {
-        this.observer.handleMessageSent(layer, sender);
+    public handleMessageSent(layer: SMSTCPlayer, recipient: string) {
+        this.observer.handleMessageSent(layer, recipient);
     }
 
-    public sendMessage(sms: string, sender: string, ackBack = true){
-        this.sender.createNewConversation(sms, sender, ackBack);
+    public sendMessage(sms: string, recipient: string, ackBack = true){
+        this.sender.createNewConversation(sms, recipient, ackBack);
     }
 
     public processMessage(message: string[]): string {

@@ -1,5 +1,6 @@
 import { SmsTcpAppLayer } from "./smsTcpAppLayer";
 
+// Abstract interface
 export interface TcpLayer {
     id: number;
     key: number;
@@ -23,6 +24,10 @@ export class SMSTCPlayer extends SmsTcpAppLayer {
         return id === 0;
     }
 
+    /**
+     * Transform a coded string into a TcpLayer object
+     * @param sms 
+     */
     public static decodeSMS(sms: string): TcpLayer {
         const headersSms = this.fillHeaderString(this.hexToBinary(sms.substr(0, 14)), 56);
         const dataSms = sms.substr(14, sms.length);
@@ -40,6 +45,10 @@ export class SMSTCPlayer extends SmsTcpAppLayer {
         return tcpLayer;
     }
 
+    /**
+     * Encodes a Sms Stack layer object into a string
+     * @param layer SmsStack layer
+     */
     public static encodeSMS(layer: TcpLayer): string {
         const idSMS = this.fillHeaderBinary(layer.id, 1);
         const keySMS = this.fillHeaderBinary(layer.key, 8);
@@ -57,12 +66,21 @@ export class SMSTCPlayer extends SmsTcpAppLayer {
         return headersHexa + layer.data;
     }
 
+    /**
+     * Constructs an Sms Stack packet with packet loss info
+     * @param layer Base Tcp Layer
+     * @param sBegin Index of missing packet
+     */
     public static messagePacketLost(layer: TcpLayer, sBegin?: number): TcpLayer {
         const idx = sBegin !== null ? sBegin : layer.sBegin;
         const tcpLayer: TcpLayer = { id: layer.id, key: layer.key, syn: 0, ack: 1, psh: 0, fin: 0, sBegin: idx!, cipher: layer.cipher, checkSum: layer.checkSum, data: "" }
         return tcpLayer;
     }
 
+    /**
+     * Contructs an Sms Packet Fin layer fin packet
+     * @param layer Base Tcp Layer
+     */
     public static messagePacketFin(layer: TcpLayer): TcpLayer {
         const tcpLayer: TcpLayer = { id: layer.id, key: layer.key, syn: 0, ack: 1, psh: 0, fin: 1, sBegin: layer.sBegin, cipher: layer.cipher, checkSum: layer.checkSum, data: "" }
         return tcpLayer;
