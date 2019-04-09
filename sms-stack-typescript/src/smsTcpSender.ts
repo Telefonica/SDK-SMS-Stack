@@ -13,7 +13,7 @@ export class SmsTcpSender extends SMSTCP {
         //TODO - COMPLETE
     }
 
-    public createNewConversation(sms: string, sender: string) {
+    public createNewConversation(sms: string, sender: string, ackBack = true) {
         const key = this.generateRandomKey();
         const cipherText = this.cipherText(sms);
         const messagesToSend = this.splitMessage(cipherText);
@@ -21,13 +21,13 @@ export class SmsTcpSender extends SMSTCP {
             return;
         }
         messagesToSend!.forEach((item, index) => {
-            this.sendMessage(item, key, index, index == messagesToSend.length - 1, sender);  
+            this.sendMessage(item, key, index, index == messagesToSend.length - 1, sender, ackBack);  
         })
         this.controller.handleFinalMessageSent(messagesToSend, sender);
     }
 
-    private sendMessage(text: string, key: number, sBegin: number, isFin: boolean, sender: string) {
-        const smsLayer: TcpLayer = { id: 0, key: key, syn: +!isFin, ack: 0, psh: 0, fin: +isFin, sBegin: sBegin, cipher: this.chipherMode, checkSum: 0, data: text }
+    private sendMessage(text: string, key: number, sBegin: number, isFin: boolean, sender: string, ackBack: Boolean) {
+        const smsLayer: TcpLayer = { id: 0, key: key, syn: +!isFin, ack: 0, psh: +!ackBack, fin: +isFin, sBegin: sBegin, cipher: this.chipherMode, checkSum: 0, data: text }
         this.sendSms(smsLayer, sender);
         this.controller.handleMessageSent(smsLayer, sender)
     }

@@ -33,8 +33,8 @@ class SmsTcpController:
     def handle_message_sent(self, layer, sender):
         self._observer.handle_message_sent(layer, sender)
 
-    def send_message(self, sms, sender):
-        self._sender.create_new_conversation(sms, sender)
+    def send_message(self, sms, sender, ack_back = True):
+        self._sender.create_new_conversation(sms, sender, ack_back)
 
     def receive_message(self, sms, receiver):
         self._receiver.add_new_message(sms, receiver)

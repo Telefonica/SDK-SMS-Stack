@@ -1,6 +1,6 @@
 {
   "name": "sms-stack",
-  "version": "1.0.9",
+  "version": "1.1.1",
   "description": "Sms Stack for Typescript",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

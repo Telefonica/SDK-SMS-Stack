@@ -73,17 +73,24 @@ public class SMSTCPController {
         this(activitySms, 0, "");
     }
 
-
-    // TODO - Implmente cipher AES
-
-
     /**
      * Send new message
      * @param sms sms to send
      * @param phoneNo phone number of the receiver
      */
     public void sendMessage(String sms, String[] phoneNo) {
-        smstcpSender.createNewConverstaion(sms, phoneNo);
+        smstcpSender.createNewConverstaion(sms, phoneNo, true);
+    }
+
+
+    /**
+     * Send new message
+     * @param sms sms to send
+     * @param phoneNo phone number of the receiver
+     * @param phoneNo whether there's response or not to the petition
+     */
+    public void sendMessage(String sms, String[] phoneNo, Boolean ackBack) {
+        smstcpSender.createNewConverstaion(sms, phoneNo, ackBack);
     }
 
     // UTILS ------------------------------

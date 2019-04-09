@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="sms-stack",
-    version="0.0.4",
+    version="1.1.0",
     author="Lucas Fernandez",
     author_email="lucas.fernandezaragon@telefonica.com",
     description="Sms Stack SDK for python",

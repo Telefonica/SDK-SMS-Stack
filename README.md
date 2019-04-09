@@ -9,8 +9,8 @@ The main layer features techniques to control the order and the number of sms fo
 
 You can easily implement your own protocol on the top of the stack of Sms Stack and add new features to an sms based communication between devices.
 
-# Prerequisities
-You can download & use sms-stack in multiple environments in order to implement it in multiple scenearios.
+# Prerequisites
+You can download use sms-stack in multiple environments in order to implement it in multiple scenarios.
 
 ## Typescript
 Npm - https://www.npmjs.com
@@ -36,11 +36,11 @@ Simply add the framework in one of each repositories given in your repository.
 ```npm install sms-stack 1.x.x```
 
 ## Python
-```pip install sms stack 0.x.x```
+```pip install sms stack 1.x.x```
 
 ## Android
 Add in the gradle app file
-```implementation 'com.example.smstcplibrary:smsstack:0.x.x```
+```implementation 'com.example.smstcplibrary:smsstack:1.x.x```
 
 For further implementation, please use the given wiki
 

@@ -58,9 +58,10 @@ class SmsTcpReceiver(SmsTcp):
             super().send_sms(response_failed, receiver)
             self._message_received = self.remove_sms_by(sms.key, missing[0])
             return
-
-        response =  SmsTcpLayer.message_packet_lost(sms)
-        super().send_sms(response, receiver)
+        # Control the ack
+        if(sms.psh == 0):
+            response =  SmsTcpLayer.message_packet_lost(sms)
+            super().send_sms(response, receiver)
         self._message_received = self.remove_sms_by(sms.key)
         self._controller.handle_final_message_received([x.data for x in sms_stream], receiver)
 

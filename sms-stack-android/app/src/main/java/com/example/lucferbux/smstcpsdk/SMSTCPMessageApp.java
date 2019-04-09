@@ -59,9 +59,8 @@ public class SMSTCPMessageApp {
     }
 
 
-    public void sendNewMessage(String text, String[] phoneNo) {
-        SMSTCPMessageLayer smstcpMessageLayer = new SMSTCPMessageLayer(1, 0, 0, 0, 3, "hola que tal");
-        smsTCPController.sendMessage(text, phoneNo);
+    public void sendNewMessage(String text, String[] phoneNo, Boolean ackBack) {
+        smsTCPController.sendMessage(text, phoneNo, ackBack);
     }
 
     public void onMessageSent() {

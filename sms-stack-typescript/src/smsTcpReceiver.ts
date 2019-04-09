@@ -55,8 +55,11 @@ export class SmsTcpReceiver extends SMSTCP  {
             this.messageReceived = this.removeSmsBy(sms.key, min);
             return;
         }
-        const response = SMSTCPlayer.messagePacketFin(sms);
-        this.sendSms(response, receiver);
+        // Control no return
+        if(sms.psh == 0){
+            const response = SMSTCPlayer.messagePacketFin(sms);
+            this.sendSms(response, receiver);
+        }
         this.messageReceived = this.removeSmsBy(sms.key);
         this.controller!.handleFinalMessageReceived(messages, receiver);
     }
