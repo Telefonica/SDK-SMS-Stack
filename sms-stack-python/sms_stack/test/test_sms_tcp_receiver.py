@@ -25,15 +25,15 @@ def test_add_message_launch_exception(capsys):
     mock.add_new_message(not_hex, "receiver")
     captured = capsys.readouterr() 
     assert "Error implementing sms layer" in captured.out
+    assert "Error converting hexadecimal to binary... input: {}".format(not_hex) in captured.out
 
-#Check fails
-def test_missing_number_fail():
+def test_missing_number_null():
     mock = SmsTcpReceiver(1, "key", None, None)
     mock.missing_numbers([])
     assert len(mock.missing_numbers([])) == 0
 
 def test_missing_number_fail_2():
     mock = SmsTcpReceiver(1, "key", None, None)
-    my_list = [SmsTcpLayer(s_begin = 0), SmsTcpLayer(s_begin=0)]
-    mock.missing_numbers(my_list)
-    assert len(mock.missing_numbers([])) == 0
+    my_list = [SmsTcpLayer(s_begin = 3), SmsTcpLayer(s_begin=1)]
+    data_len = len(mock.missing_numbers(my_list))
+    assert  data_len == 2
