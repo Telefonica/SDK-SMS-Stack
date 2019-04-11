@@ -2,12 +2,7 @@ import binascii
 
 class SmsTcpLayerFormatter:
     #TOCHECK *** ¿Deberiamos comprobar si es hexadecimal, o binario antes de proceder? (try..catch)
-    ## ¿Estamos seguros que siempre se pasa el dato correcto?
 
-    ###def is_hex(s):
-    ###    h = re.fullmatch(r"[0-9a-fA-F]*", s or "") is not None
-    ###    h2 = len(s) % 2 == 0
-    ###    return (h and h2)
     @staticmethod
     def hex_to_binary(hex):
         """Convert hex string to binary string
@@ -18,8 +13,13 @@ class SmsTcpLayerFormatter:
         Returns:
             str: Binary string
         """
+        try:
+            binary = bin(int(hex, 16))[2:]
+        except:
+            binary = None
+            print("Error converting hexadecimal to binary... input: {}".format(hex))
 
-        return bin(int(hex, 16))[2:]
+        return binary
     
     @staticmethod
     def binary_to_hex(bin):
@@ -31,8 +31,13 @@ class SmsTcpLayerFormatter:
         Returns:
             str: Hex string
         """
+        try:
+            hexa  = hex(int(bin, 2))[2:]
+        except:
+            hexa  = None
+            print("Error converting binary to hexadecimal... input: {}".format(hex))
 
-        return hex(int(bin, 2))[2:]
+        return hexa 
     
     @staticmethod
     def dec_to_binary(dec):
@@ -44,8 +49,13 @@ class SmsTcpLayerFormatter:
         Returns:
             str: Binary string
         """
+        try:
+            binary  = "{0:b}".format(dec)
+        except:
+            binary  = None
+            print("Error converting decimal to binary... input: {}".format(hex))
 
-        return "{0:b}".format(dec)
+        return binary
 
     @staticmethod
     def fill_header_string(header, req_size):
