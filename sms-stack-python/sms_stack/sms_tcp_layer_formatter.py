@@ -1,7 +1,13 @@
 import binascii
 
 class SmsTcpLayerFormatter:
+    #TOCHECK *** ¿Deberiamos comprobar si es hexadecimal, o binario antes de proceder? (try..catch)
+    ## ¿Estamos seguros que siempre se pasa el dato correcto?
 
+    ###def is_hex(s):
+    ###    h = re.fullmatch(r"[0-9a-fA-F]*", s or "") is not None
+    ###    h2 = len(s) % 2 == 0
+    ###    return (h and h2)
     @staticmethod
     def hex_to_binary(hex):
         """Convert hex string to binary string

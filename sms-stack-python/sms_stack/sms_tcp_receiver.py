@@ -77,6 +77,7 @@ class SmsTcpReceiver(SmsTcp):
         """
 
         sms_index = [x.s_begin for x in num_list]
+        #TOCHECK *** ¿¿y si sms_index está vacia??
         original_list = [x for x in range(sms_index[0], sms_index[-1] + 1)]
         sms_index_set = set(sms_index)
         return (list(sms_index_set ^ set(original_list)))

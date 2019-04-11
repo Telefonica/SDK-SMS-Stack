@@ -50,8 +50,9 @@ class SmsTcpLayer:
             self.s_begin = int(header_sms[13:21], 2)
             self.cipher = int(header_sms[21:24], 2)
             self.check_sum = int(header_sms[24:], 2)
-        except:
+        except Exception as e:
             print("Bad length exception")
+            print(e)
         
     
     def enconde_sms(self):
