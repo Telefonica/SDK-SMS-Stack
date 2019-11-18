@@ -77,10 +77,13 @@ class SmsTcpReceiver(SmsTcp):
         """
 
         sms_index = [x.s_begin for x in num_list]
-        original_list = [x for x in range(sms_index[0], sms_index[-1] + 1)]
-        sms_index_set = set(sms_index)
-        return (list(sms_index_set ^ set(original_list)))
+        data = []
+        if sms_index:
+            original_list = [x for x in range(sms_index[0], sms_index[-1] + 1)]
+            sms_index_set = set(sms_index)
+            data = (list(sms_index_set ^ set(original_list)))
 
+        return data
     
     def remove_sms_by(self, key, s_begin=None):
         """Removes the stream of sms by a given key

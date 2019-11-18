@@ -19,7 +19,7 @@ class SmsTcp(object):
 
         self.sms_lenght = 140
         self.header_lenght = 14
-        self.data_lenght = self.sms_lenght - self.sms_lenght
+        self.data_lenght = self.sms_lenght - self.header_lenght
         self.cipher_mode = cipher_mode
         self.cipher_key = cipher_key
         self.sms_broadcaster = sms_broadcaster

@@ -9,7 +9,7 @@ from Crypto.Util import Counter
 
 
 class AESCipher:
-
+#TOCHECK *** ¿Se podrían dejar como estáticos para no necesitar instanciar la clase?
     def int_of_string(self, s):
         return int(binascii.hexlify(s), 16)
     

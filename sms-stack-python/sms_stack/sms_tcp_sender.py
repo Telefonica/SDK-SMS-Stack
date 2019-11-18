@@ -29,6 +29,7 @@ class SmsTcpSender(SmsTcp):
         key = super().generate_random_key()
         ciphered_text = self.cipher_text(sms)
         message_to_send = self.split_message(ciphered_text)
+        #TOCHECK *** yo miraría antes de hacer el split [ciphered_text]
         if(message_to_send is None):
             return
         for idx, message in enumerate(message_to_send):
@@ -81,6 +82,6 @@ class SmsTcpSender(SmsTcp):
             [str]: List with all parts splitted
         """
 
-        sms_len = self.sms_lenght
+        sms_len = self.data_lenght
         return [cipher_text[i:i+sms_len] for i in range(0, len(cipher_text), sms_len)]
         
