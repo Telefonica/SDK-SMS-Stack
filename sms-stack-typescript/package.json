@@ -37,7 +37,7 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "buffer": "^5.2.1",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
